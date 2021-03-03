@@ -124,6 +124,16 @@ let DataServiceProvider = class DataServiceProvider {
                 ]
             },
             {
+                _proto: "KEYVAL",
+                title: "Optimización",
+                val: []
+            },
+            {
+                _proto: "JSON",
+                title: "JSON Verificable",
+                val: { data: '{"json":"yass"}' }
+            },
+            {
                 _proto: "TREE",
                 title: "Histórico",
                 val: [
@@ -132,14 +142,52 @@ let DataServiceProvider = class DataServiceProvider {
                             { key: '16/01/21 venta a tienda', collapsed: true, childs: [] },
                             { key: '15/01/21 transporte', collapsed: true, childs: [] },
                             { key: '15/01/21 venta desde almazara', collapsed: true, childs: [] }
-                        ] }
+                        ] },
+                    { key: 'Próximo mes', collapsed: true, childs: [] },
+                    { key: 'Próximo año', collapsed: true, childs: [] },
+                    { key: 'Posterior', collapsed: true, childs: [] }
                 ]
             },
             {
-                _proto: "JSON",
-                title: "JSON Verificable",
-                val: { data: '{"json":"yass"}' }
-            }
+                _proto: "TREE",
+                title: "Pasado",
+                val: [
+                    { key: 'Mañana', collapsed: true, childs: [] },
+                    { key: 'Próxima semana', collapsed: false, childs: [
+                            { key: '16/01/21 venta a tienda', collapsed: true, childs: [] },
+                            { key: '15/01/21 transporte', collapsed: true, childs: [] },
+                            { key: '15/01/21 venta desde almazara', collapsed: true, childs: [] }
+                        ] },
+                    { key: 'Próximo mes', collapsed: true, childs: [] },
+                    { key: 'Próximo año', collapsed: true, childs: [] },
+                    { key: 'Posterior', collapsed: true, childs: [] }
+                ]
+            },
+            {
+                _proto: "TREE",
+                title: "Evaluación",
+                val: [
+                    { key: 'Ranking público', collapsed: false, childs: [{ key: '5 estrellas', collapsed: true, childs: [] },] },
+                    { key: 'Ranking personal', collapsed: false, childs: [{ key: '5 estrellas', collapsed: true, childs: [] },] },
+                    { key: 'Ranking registro', collapsed: false, childs: [{ key: '5 estrellas', collapsed: true, childs: [] },] }
+                ]
+            },
+            {
+                _proto: "TREE",
+                title: "Pasado",
+                val: [
+                    { key: '0º Qué es este producto', collapsed: true, childs: [] },
+                    { key: '1º Cómo se contabiliza', collapsed: true, childs: [] },
+                    { key: '2º Cuáles son sus criterios', collapsed: true, childs: [] },
+                    { key: '3º Quiénes han participado', collapsed: true, childs: [] },
+                    { key: '4º Qué se puede hacer desde aquí', collapsed: true, childs: [] },
+                    { key: '5º Cómo se verifica', collapsed: true, childs: [] },
+                    { key: '6º Cómo interpretar el histórico', collapsed: true, childs: [] },
+                    { key: '7º Cómo interpretar lo planteado', collapsed: true, childs: [] },
+                    { key: '8º Cómo se evalua', collapsed: true, childs: [] },
+                    { key: '9º Cómo funciona la ayuda', collapsed: true, childs: [] },
+                ]
+            },
         ]);
     }
 };
