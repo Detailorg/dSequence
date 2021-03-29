@@ -229,7 +229,7 @@ let DataServiceProvider = class DataServiceProvider {
             },
             {
                 _proto: "TREE",
-                title: "Histórico",
+                title: "Historial",
                 val: [
                     { key: 'Hoy', collapsed: true, childs: [] },
                     { key: 'Ultima semana', collapsed: true, childs: [
@@ -244,7 +244,7 @@ let DataServiceProvider = class DataServiceProvider {
             },
             {
                 _proto: "TREE",
-                title: "Pasado",
+                title: "Pendiente",
                 val: [
                     { key: 'Mañana', collapsed: true, childs: [] },
                     { key: 'Próxima semana', collapsed: false, childs: [
@@ -268,7 +268,7 @@ let DataServiceProvider = class DataServiceProvider {
             },
             {
                 _proto: "TREE",
-                title: "Pasado",
+                title: "Ayuda",
                 val: [
                     { key: '0º Qué es este producto', collapsed: true, childs: [] },
                     { key: '1º Cómo se contabiliza', collapsed: true, childs: [] },
