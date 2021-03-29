@@ -19,11 +19,11 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: 'login',
-        loadChildren: () => Promise.all(/*! import() | pages-login-login-module */[__webpack_require__.e("default~pages-login-login-module~pages-register-register-module~tabs-home-home-module~tabs-new-item-~774c0738"), __webpack_require__.e("pages-login-login-module")]).then(__webpack_require__.bind(null, /*! ./pages/login/login.module */ "T7fL")).then(m => m.LoginPageModule)
+        loadChildren: () => Promise.all(/*! import() | pages-login-login-module */[__webpack_require__.e("default~pages-login-login-module~pages-register-register-module~tabs-home-home-module~tabs-product-d~1d49c10a"), __webpack_require__.e("pages-login-login-module")]).then(__webpack_require__.bind(null, /*! ./pages/login/login.module */ "T7fL")).then(m => m.LoginPageModule)
     },
     {
         path: 'register',
-        loadChildren: () => Promise.all(/*! import() | pages-register-register-module */[__webpack_require__.e("default~pages-login-login-module~pages-register-register-module~tabs-home-home-module~tabs-new-item-~774c0738"), __webpack_require__.e("pages-register-register-module")]).then(__webpack_require__.bind(null, /*! ./pages/register/register.module */ "pNIe")).then(m => m.RegisterPageModule)
+        loadChildren: () => Promise.all(/*! import() | pages-register-register-module */[__webpack_require__.e("default~pages-login-login-module~pages-register-register-module~tabs-home-home-module~tabs-product-d~1d49c10a"), __webpack_require__.e("pages-register-register-module")]).then(__webpack_require__.bind(null, /*! ./pages/register/register.module */ "pNIe")).then(m => m.RegisterPageModule)
     },
     { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];

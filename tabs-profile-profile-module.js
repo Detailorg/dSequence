@@ -18,7 +18,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
 /* harmony import */ var _profile_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./profile.page */ "a1bg");
 /* harmony import */ var _profile_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./profile-routing.module */ "DANH");
-/* harmony import */ var src_app_components_components_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/components/components.module */ "j1ZV");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/components.module */ "T/Ra");
 
 
 
@@ -35,7 +35,7 @@ ProfilePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         imports: [
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["IonicModule"],
             _angular_common__WEBPACK_IMPORTED_MODULE_4__["CommonModule"],
-            src_app_components_components_module__WEBPACK_IMPORTED_MODULE_8__["ComponentsModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_8__["ComponentsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild([{ path: '', component: _profile_page__WEBPACK_IMPORTED_MODULE_6__["ProfilePage"] }]),
             _profile_routing_module__WEBPACK_IMPORTED_MODULE_7__["ProfilePageRoutingModule"],
@@ -94,7 +94,7 @@ ProfilePageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-title>\n      Tab 3\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Tab 3</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <app-construction></app-construction>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Profile\n    </ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button *ngIf=\"editMode\" (click)=\"cancelEdit()\">CANCEL</ion-button>\n      <ion-button *ngIf=\"editMode\" (click)=\"saveEdit()\">SAVE</ion-button>\n      <ion-button *ngIf=\"!editMode\" (click)=\"edit()\">EDIT</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <app-tree [editMode]=\"editMode\" [(data)]=\"data.Profile.val\"></app-tree>\n\n</ion-content>");
 
 /***/ }),
 
@@ -112,14 +112,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _raw_loader_profile_page_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./profile.page.html */ "K2w8");
 /* harmony import */ var _profile_page_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profile.page.scss */ "rxPQ");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_app_services_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/core */ "Xavl");
+
 
 
 
 
 let ProfilePage = class ProfilePage {
-    constructor() { }
+    constructor(core) {
+        this.core = core;
+        this.edit = () => this.core.data.edit();
+        this.saveEdit = () => this.core.data.saveEdit();
+        this.cancelEdit = () => this.core.data.cancelEdit();
+    }
+    get data() {
+        return this.core.data.data;
+    }
+    get editMode() {
+        return this.core.data.editMode;
+    }
 };
-ProfilePage.ctorParameters = () => [];
+ProfilePage.ctorParameters = () => [
+    { type: src_app_services_core__WEBPACK_IMPORTED_MODULE_4__["CoreProvider"] }
+];
 ProfilePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-profile',
