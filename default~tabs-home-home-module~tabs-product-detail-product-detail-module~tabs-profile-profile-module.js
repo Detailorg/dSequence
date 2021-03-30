@@ -52,10 +52,23 @@ let TreeComponent = class TreeComponent {
             }
         });
     }
-    tryLink(item) {
-        if (item.startsWith('app://product/')) {
-            this.core.navCtrl.navigateForward(item.replace('app://product', '/detail'));
+    tryLink(link) {
+        if (link.startsWith('app://product/')) {
+            this.core.navCtrl.navigateForward(link.replace('app://product', '/detail'));
         }
+    }
+    fetchProductName(link) {
+        if (link.startsWith('app://product/')) {
+            const prodId = link.replace('app://product/', '');
+            let prod = null;
+            this.core.data.data.Products.forEach(p => {
+                if (prodId == p[0].val.id)
+                    prod = p;
+            });
+            return (prod) ? prod[1].val.title : 'Product not found';
+        }
+        else
+            return link;
     }
 };
 TreeComponent.ctorParameters = () => [
@@ -526,7 +539,7 @@ ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<img [src]=\"core.resourceURL(data.img).ev |async\">\n<ion-input #fInput type=\"file\" accept=\"image/*\" (ionChange)=\"core.loadImage($event, data)\" style=\"display: none;\">\n</ion-input>\n<ion-item *ngIf=\"editMode\">\n    <ion-label>Cambiar imagen</ion-label>\n    <ion-button (click)=\"core.openIonInputFile(fInput)\" fill=\"outline\">SELECCIONAR</ion-button>\n</ion-item>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ng-container *ngIf=\"editMode\">\n    <ion-item>\n        <ion-label>Title</ion-label>\n        <ion-input [(ngModel)]=\"data.title\"></ion-input>\n    </ion-item>\n    <ion-item>\n        <ion-label>Desc</ion-label>\n        <ion-input [(ngModel)]=\"data.desc\"></ion-input>\n    </ion-item>\n    <ion-item>\n        <ion-label>Aux</ion-label>\n        <ion-input [(ngModel)]=\"data.aux\"></ion-input>\n    </ion-item>\n</ng-container>\n<img [src]=\"core.resourceURL(data.img).ev |async\">\n<ion-input #fInput type=\"file\" accept=\"image/*\" (ionChange)=\"core.loadImage($event, data)\" style=\"display: none;\">\n</ion-input>\n<ion-item *ngIf=\"editMode\">\n    <ion-label>Cambiar imagen</ion-label>\n    <ion-button (click)=\"core.openIonInputFile(fInput)\" fill=\"outline\">SELECCIONAR</ion-button>\n</ion-item>");
 
 /***/ }),
 
@@ -660,7 +673,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-reorder-group (ionItemReorder)=\"core.doReorder($event, data)\" [disabled]=\"!editMode\">\n  <div *ngFor=\"let item of data\">\n    <ion-item *ngIf=\"!editMode\" (click)=\"item['collapsed']=!item['collapsed']\">\n      <ion-icon *ngIf=\"!item.childs.length\" name=\"stop-circle-outline\"></ion-icon>\n      <ion-icon *ngIf=\"item.childs.length\" [name]=\"item['collapsed']?'caret-forward-outline':'caret-down-outline'\">\n      </ion-icon>\n      <ion-label (click)=\"tryLink(item.key)\" [style.cursor]=\"item.key.startsWith('app://') ? 'pointer':''\">\n        {{item.key}}\n        <ion-badge *ngIf=\"item.childs.length\">{{item.childs.length}}</ion-badge>\n      </ion-label>\n    </ion-item>\n    <ion-item *ngIf=\"editMode\">\n      <ion-reorder slot=\"start\"></ion-reorder>\n      <ion-input #el ion-long-press [(ngModel)]=\"item.key\" [interval]=\"1000\" (longPressed)=\"longPressed(item)\">\n      </ion-input>\n      <ion-button (click)=\"longPressed(item)\">\n        <ion-icon name=\"link-outline\"></ion-icon>\n      </ion-button>\n      <!-- TODO: add tooltip (add child) -->\n      <ion-button *ngIf=\"!item.childs.length\" (click)=\"addChild(item)\">\n        <ion-icon name=\"add\"></ion-icon>\n      </ion-button>\n      <ion-button color=\"danger\" (click)=\"core.deleteMe(item, data)\">\n        <ion-icon name=\"trash\"></ion-icon>\n      </ion-button>\n    </ion-item>\n\n    <div *ngIf=\"!item['collapsed']\" style=\"margin-left: 10px;\">\n      <app-tree [editMode]=\"editMode\" [(data)]=\"item.childs\"></app-tree>\n    </div>\n  </div>\n</ion-reorder-group>\n\n<ion-button *ngIf=\"editMode\" ion-item (click)=\"addItem(data)\">Añadir item</ion-button>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-reorder-group (ionItemReorder)=\"core.doReorder($event, data)\" [disabled]=\"!editMode\">\n  <div *ngFor=\"let item of data\">\n    <ion-item *ngIf=\"!editMode\" (click)=\"item['collapsed']=!item['collapsed']\">\n      <ion-icon *ngIf=\"!item.childs.length\" name=\"stop-circle-outline\"></ion-icon>\n      <ion-icon *ngIf=\"item.childs.length\" [name]=\"item['collapsed']?'caret-forward-outline':'caret-down-outline'\">\n      </ion-icon>\n      <ion-label *ngIf=\"item.key.startsWith('app://')\" (click)=\"tryLink(item.key)\" [style.cursor]=\"'pointer'\">\n        {{fetchProductName(item.key)}}\n        <ion-icon name=\"link-outline\"></ion-icon>\n        <ion-badge *ngIf=\"item.childs.length\">{{item.childs.length}}</ion-badge>\n      </ion-label>\n      <ion-label *ngIf=\"!item.key.startsWith('app://')\">\n        {{item.key}}\n        <ion-badge *ngIf=\"item.childs.length\">{{item.childs.length}}</ion-badge>\n      </ion-label>\n    </ion-item>\n    <ion-item *ngIf=\"editMode\">\n      <ion-reorder slot=\"start\"></ion-reorder>\n      <ion-input #el ion-long-press [(ngModel)]=\"item.key\" [interval]=\"1000\" (longPressed)=\"longPressed(item)\">\n      </ion-input>\n      <ion-button (click)=\"longPressed(item)\">\n        <ion-icon name=\"link-outline\"></ion-icon>\n      </ion-button>\n      <!-- TODO: add tooltip (add child) -->\n      <ion-button *ngIf=\"!item.childs.length\" (click)=\"addChild(item)\">\n        <ion-icon name=\"add\"></ion-icon>\n      </ion-button>\n      <ion-button color=\"danger\" (click)=\"core.deleteMe(item, data)\">\n        <ion-icon name=\"trash\"></ion-icon>\n      </ion-button>\n    </ion-item>\n\n    <div *ngIf=\"!item['collapsed']\" style=\"margin-left: 10px;\">\n      <app-tree [editMode]=\"editMode\" [(data)]=\"item.childs\"></app-tree>\n    </div>\n  </div>\n</ion-reorder-group>\n\n<ion-button *ngIf=\"editMode\" ion-item (click)=\"addItem(data)\">Añadir item</ion-button>");
 
 /***/ }),
 
